@@ -21,3 +21,68 @@ modelServer.py为模型调度脚本，包括以下几个线程：
 ## 3、send.py
 
 模型imagezmq图片发送任务
+
+## 4、数据格式
+
+### 接收数据格式：
+
+{
+    "cameraId": 106, 
+    "time": "32234234433433", 
+    "modelId": 1, 
+    "modelName": "person", 
+    "rois": [
+        {
+            "id": 24, 
+            "polygon": [
+                0., 0.,
+                1., 0., 
+                1., 1., 
+                0., 1.
+            ]
+        }, 
+        {
+            "id": 25, 
+            "polygon":[
+                0., 0.,
+                1., 0., 
+                1., 1., 
+                0., 1.
+            ]
+        }
+    ]
+}
+
+### 发送数据格式
+
+{
+    "cameraId":1,
+    "modelId":100,
+    "modelName":"smoke",
+    "frameBase64":"base64string",
+    "batchNum":"32234234433433",
+    "results": [
+        {
+            "roiId": 100,
+            "value": [
+                person",
+                "phone"
+            ],
+            "bbox": [
+                [
+                    0,
+                    0,
+                    1,
+                    1
+                ],
+                [
+                    0,
+                    0,
+                    1,
+                    1
+                ]
+            ]
+        }
+    ]
+}
+
