@@ -39,7 +39,7 @@ import json
     ]
 }
 '''
-sender = imagezmq.ImageSender(connect_to="tcp://127.0.0.1:6000")
+sender = imagezmq.ImageSender(connect_to="tcp://127.0.0.1:5556")
 
 # rpi_name = socket.gethostname()
 # print(rpi_name)
@@ -93,6 +93,21 @@ msg3 = {
         ]
     }
 
+msg4 = {
+        "cameraId": 106,
+        "time": None,
+        "modelId": 1,
+        "modelName": "play_phone",
+        "rois": [
+            {
+                "id": 25,
+                "polygon": [
+                    0, 0, 1.0, 0, 1., 1., 0, 1.
+                ]
+            },
+        ]
+    }
+
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -100,11 +115,12 @@ while True:
 
     flag += 1
     msg = eval("msg{}".format(flag))
-    # msg = msg3
+    #msg = msg2
 
-    if flag == 3:
+    if flag == 4:
         flag = 0
 
     msg["time"] = str(int(time()))
     response = sender.send_image(json.dumps(msg), frame)
     print(response)
+
